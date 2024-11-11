@@ -1,3 +1,4 @@
+"""
 class Node:
     def __init__(self, data):
         self.data = data
@@ -115,3 +116,116 @@ stack.push(3)
 stack.display()
 print(stack.pop())
 stack.display()
+"""
+
+#task1
+class Node_lab:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Node_labList:
+    def __init__(self):
+        self.head = None
+
+    def add(self, data):
+        new_node = Node_lab(data)
+        if not self.head:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+        print(f"Елемент {data} додано у список.")
+
+    def delete(self, data):
+        current = self.head
+        previous = None
+        while current:
+            if current.data == data:
+                if previous:
+                    previous.next = current.next
+                else:
+                    self.head = current.next
+                print(f"Елемент {data} видалено з списку.")
+                return
+            previous = current
+            current = current.next
+        print(f"Елемент {data} не знайдено у списку.")
+
+    def display(self):
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+        print("Вміст списку:", elements)
+
+    def contains(self, data):
+        current = self.head
+        while current:
+            if current.data == data:
+                print(f"Значення {data} є у списку.")
+                return True
+            current = current.next
+        print(f"Значення {data} немає у списку.")
+        return False
+
+    def replace(self, old_data, new_data):
+        current = self.head
+        while current:
+            if current.data == old_data:
+                current.data = new_data
+                print(f"Значення {old_data} замінено на {new_data}.")
+                return
+            current = current.next
+        print(f"Значення {old_data} не знайдено у списку.")
+
+def main():
+    linked_list = Node_labList()
+    initial_data = input("Введіть початковий набір чисел через пробіл: ")
+    for num in initial_data.split():
+        linked_list.add(int(num))
+
+    while True:
+        print("\nМеню:")
+        print("1. Додати елемент у список.")
+        print("2. Видалити елемент зі списку.")
+        print("3. Показати вміст списку.")
+        print("4. Перевірити, чи є значення у списку.")
+        print("5. Замінити значення у списку.")
+        print("6. Вийти.")
+
+        choice = input("Виберіть пункт: ")
+
+        if choice == '1':
+            data = int(input("Введіть число для додавання: "))
+            linked_list.add(data)
+        elif choice == '2':
+            data = int(input("Введіть число для видалення: "))
+            linked_list.delete(data)
+        elif choice == '3':
+            linked_list.display()
+        elif choice == '4':
+            data = int(input("Введіть число для перевірки: "))
+            linked_list.contains(data)
+        elif choice == '5':
+            old_data = int(input("Введіть значення для заміни: "))
+            new_data = int(input("Введіть нове значення: "))
+            linked_list.replace(old_data, new_data)
+        elif choice == '6':
+            print("Вихід з програми.")
+            break
+        else:
+            print("Невірний вибір. Спробуйте ще раз.")
+
+main()
+
+#task2
+class Node_lab2:
+    def __init__(self, data2):
+        self.data2 = data2
+        self.next2 = None
+        self.prev2 = None
+
